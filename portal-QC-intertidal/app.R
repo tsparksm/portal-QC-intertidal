@@ -56,12 +56,12 @@ ui <- fluidPage(
   # Select station to plot; year to highlight
   fluidRow(
     column(2, 
-           selectInput("sites", 
+           selectInput("site", 
                        label = "Site:", 
                        choices = initial_stations, 
                        selected = initial_station)), 
     column(2, 
-           selectInput("years", 
+           selectInput("year", 
                        label = "Year:", 
                        choices = initial_years, 
                        selected = initial_year))
@@ -87,7 +87,39 @@ ui <- fluidPage(
 )
 
 server <- function(input, output, session) {
-
+  discrete_data <- reactiveValues(data = initial_data)
+  file_date <- reactiveVal(old_date)
+  
+  # Update data and more on button push - refresh_data
+  observeEvent(input$refresh_data, {
+    update_discrete()
+    discrete_data$data <- process_discrete(load_discrete())
+    
+    # Update "last updated" date text
+    new_date <- Sys.Date()
+    file_date(new_date)
+    
+    # Station list - keep previous selection
+    updateSelectInput(session, 
+                      "site", 
+                      choices = sort(unique(discrete_data$Locator)), 
+                      selected = input$site)
+    
+    # Year list - automatically selects most recent
+    updateSelectInput(session, 
+                      "year", 
+                      choices = sort(unique(discrete_data$Year), 
+                                     decreasing = TRUE))
+  })
+  
+  # Render data date text
+  output$date_data <- renderText(
+    paste("Data last updated:", 
+          file_date())
+  )
+  
+  # Render plots
+  source(here("src", "make_plots.R"), local = TRUE)
 }
 
 # Run the application 
