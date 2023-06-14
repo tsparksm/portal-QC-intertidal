@@ -64,3 +64,52 @@ load_site <- function() {
                             Area = col_character())) %>% 
     mutate(Shallow = if_else(is.na(Shallow), FALSE, TRUE))
 }
+
+# Update discrete data file w/ all available marine bottle data, save as .rda
+update_discrete <- function() {
+  site_data <- load_site()
+  sites <- site_data$Locator
+  download_discrete(sites, parms, data_fpath_csv, include_bad = TRUE)
+  initial_data <- import_discrete(data_fpath_csv)
+  save(initial_data, 
+       file = data_fpath_rda)
+}
+
+# Load discrete data from .rda
+load_discrete <- function() {
+  load(data_fpath_rda)
+  return(initial_data)
+}
+
+# Process discrete data - update values, sort
+process_discrete <- function(discrete_data) {
+  new_data <- discrete_data %>% 
+    filter(ParmDisplayName %in% parms) %>% 
+    transmute(Locator = Locator, 
+              CollectDate = CollectDate, 
+              Value = ifelse(!is.na(OverrideValue), 
+                             OverrideValue, 
+                             Value), 
+              MDL = Mdl, 
+              RDL = Rdl, 
+              Depth = Depth, 
+              Year = year(CollectDate), 
+              Month = month(CollectDate), 
+              SampleID = as.character(SampleId), 
+              LabSampleNum = LabSampleNum, 
+              Parameter = factor(ParmDisplayName, 
+                                 levels = parms), 
+              Units = Units, 
+              Qualifier = QfrCode, 
+              QualityID = QualityId, 
+              NonDetect = grepl("<MDL", Qualifier), 
+              URL = paste0("http://dnrp-apps2/Monitoring-Portal/Sample/Edit/?lsn=", 
+                           LabSampleNum), 
+              WeekDate = paste("Week", 
+                               isoweek(CollectDate), 
+                               "-" , 
+                               month.abb[month(CollectDate)], 
+                               year(CollectDate))) %>%  
+    mutate(Value = ifelse(NonDetect, MDL, Value)) %>% 
+    filter(!is.na(Value))
+}
