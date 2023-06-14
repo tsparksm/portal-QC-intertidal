@@ -1,3 +1,14 @@
+# Define list of parameters to download and plot, with ParmName
+# See discrete_parms from kcmarine for full list
+parms <- c("NH3N", 
+           "Enterococcus", 
+           "FecalColiform", 
+           "NNN", 
+           "OP", 
+           "Salinity", 
+           "Temperature", 
+           "TotalN")
+
 # Define data paths
 Z_drive <- "//kc.kingcounty.lcl/dnrp/WLRD/STS/Share/Marine Group/"
 data_fpath_rda <- paste(Z_drive, 
