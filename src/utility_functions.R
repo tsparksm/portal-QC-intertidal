@@ -39,3 +39,17 @@ update_site <- function() {
     mutate(Shallow = if_else(is.na(Shallow), FALSE, TRUE))
   write_tsv(sites, site_fpath)
 }
+
+# Load site data downloaded from Monitoring Portal
+load_site <- function() {
+  read_tsv(site_fpath, 
+           col_types = cols(SiteID = col_character(), 
+                            SiteName = col_character(), 
+                            Locator = col_character(), 
+                            Latitude = col_double(), 
+                            Longitude = col_double(), 
+                            Shallow = col_logical(), 
+                            SiteType = col_character(), 
+                            Area = col_character())) %>% 
+    mutate(Shallow = if_else(is.na(Shallow), FALSE, TRUE))
+}
