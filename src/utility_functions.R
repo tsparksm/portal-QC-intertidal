@@ -84,7 +84,6 @@ load_discrete <- function() {
 # Process discrete data - update values, sort
 process_discrete <- function(discrete_data) {
   new_data <- discrete_data %>% 
-    filter(ParmDisplayName %in% parms) %>% 
     transmute(Locator = Locator, 
               CollectDate = CollectDate, 
               Value = ifelse(!is.na(OverrideValue), 
@@ -97,19 +96,14 @@ process_discrete <- function(discrete_data) {
               Month = month(CollectDate), 
               SampleID = as.character(SampleId), 
               LabSampleNum = LabSampleNum, 
-              Parameter = factor(ParmDisplayName, 
-                                 levels = parms), 
+              Parameter = ParmDisplayName, 
               Units = Units, 
               Qualifier = QfrCode, 
               QualityID = QualityId, 
               NonDetect = grepl("<MDL", Qualifier), 
               URL = paste0("http://dnrp-apps2/Monitoring-Portal/Sample/Edit/?lsn=", 
                            LabSampleNum), 
-              WeekDate = paste("Week", 
-                               isoweek(CollectDate), 
-                               "-" , 
-                               month.abb[month(CollectDate)], 
-                               year(CollectDate))) %>%  
+              YearDay = yday(CollectDate)) %>%  
     mutate(Value = ifelse(NonDetect, MDL, Value)) %>% 
     filter(!is.na(Value))
 }
