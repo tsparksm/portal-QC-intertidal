@@ -113,7 +113,9 @@ output$plot_entero <- renderPlotly({
     theme_bw() + 
     theme(legend.position = "none") + 
     labs(x = "", 
-         y = "Enterococcus (CFU/100 mL)")
+         y = "Enterococcus (CFU/100 mL)") + 
+    {if (input$log) scale_y_continuous(trans = "log", 
+                                       labels = scales::number_format(accuracy = 0.001))} 
   if (nrow(p$data) > 0) {
     p <- p + 
       geom_point(aes(x = YearDay, 
@@ -165,7 +167,9 @@ output$plot_fecal <- renderPlotly({
     theme_bw() + 
     theme(legend.position = "none") + 
     labs(x = "", 
-         y = "Fecal coliform (CFU/100 mL)")
+         y = "Fecal coliform (CFU/100 mL)") + 
+    {if (input$log) scale_y_continuous(trans = "log", 
+                                       labels = scales::number_format(accuracy = 0.001))} 
   if (nrow(p$data) > 0) {
     p <- p + 
       geom_point(aes(x = YearDay, 

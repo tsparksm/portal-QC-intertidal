@@ -43,7 +43,7 @@ ui <- fluidPage(
   fluidRow(
     column(3, 
            checkboxInput("log", 
-                         "Nutrients on log scale", 
+                         "Nutrients & bacteria on log scale", 
                          value = FALSE)),
     column(3, 
            checkboxInput("include_bad", 
