@@ -21,7 +21,7 @@ output$plot_T <- renderPlotly({
       scale_color_manual(values = c("TRUE" = alpha("red", 0.9), 
                                     "FALSE" = alpha("black", 0.2))) + 
       scale_shape_manual(values = c("Bad" = 15, 
-                                    "ND = 6", 
+                                    "ND" = 6, 
                                     "Regular" = 16)) + 
       scale_x_continuous(breaks = c(yday(paste(input$year, "-01-01", sep = "")), 
                                     yday(paste(input$year, "-02-01", sep = "")), 
@@ -73,7 +73,7 @@ output$plot_S <- renderPlotly({
       scale_color_manual(values = c("TRUE" = alpha("red", 0.9), 
                                     "FALSE" = alpha("black", 0.2))) + 
       scale_shape_manual(values = c("Bad" = 15, 
-                                    "ND = 6", 
+                                    "ND" = 6, 
                                     "Regular" = 16)) + 
       scale_x_continuous(breaks = c(yday(paste(input$year, "-01-01", sep = "")), 
                                     yday(paste(input$year, "-02-01", sep = "")), 
@@ -127,7 +127,7 @@ output$plot_entero <- renderPlotly({
       scale_color_manual(values = c("TRUE" = alpha("red", 0.9), 
                                     "FALSE" = alpha("black", 0.2))) + 
       scale_shape_manual(values = c("Bad" = 15, 
-                                    "ND = 6", 
+                                    "ND" = 6, 
                                     "Regular" = 16)) + 
       scale_x_continuous(breaks = c(yday(paste(input$year, "-01-01", sep = "")), 
                                     yday(paste(input$year, "-02-01", sep = "")), 
@@ -181,7 +181,7 @@ output$plot_fecal <- renderPlotly({
       scale_color_manual(values = c("TRUE" = alpha("red", 0.9), 
                                     "FALSE" = alpha("black", 0.2))) + 
       scale_shape_manual(values = c("Bad" = 15, 
-                                    "ND = 6", 
+                                    "ND" = 6, 
                                     "Regular" = 16)) + 
       scale_x_continuous(breaks = c(yday(paste(input$year, "-01-01", sep = "")), 
                                     yday(paste(input$year, "-02-01", sep = "")), 
@@ -235,7 +235,7 @@ output$plot_NH3 <- renderPlotly({
       scale_color_manual(values = c("TRUE" = alpha("red", 0.9), 
                                     "FALSE" = alpha("black", 0.2))) + 
       scale_shape_manual(values = c("Bad" = 15, 
-                                    "ND = 6", 
+                                    "ND" = 6, 
                                     "Regular" = 16)) + 
       scale_x_continuous(breaks = c(yday(paste(input$year, "-01-01", sep = "")), 
                                     yday(paste(input$year, "-02-01", sep = "")), 
@@ -289,7 +289,7 @@ output$plot_NNN <- renderPlotly({
         scale_color_manual(values = c("TRUE" = alpha("red", 0.9), 
                                       "FALSE" = alpha("black", 0.2))) + 
         scale_shape_manual(values = c("Bad" = 15, 
-                                      "ND = 6", 
+                                      "ND" = 6, 
                                       "Regular" = 16)) + 
         scale_x_continuous(breaks = c(yday(paste(input$year, "-01-01", sep = "")), 
                                       yday(paste(input$year, "-02-01", sep = "")), 
@@ -343,7 +343,7 @@ output$plot_totalN <- renderPlotly({
         scale_color_manual(values = c("TRUE" = alpha("red", 0.9), 
                                       "FALSE" = alpha("black", 0.2))) + 
         scale_shape_manual(values = c("Bad" = 15, 
-                                      "ND = 6", 
+                                      "ND" = 6, 
                                       "Regular" = 16)) + 
         scale_x_continuous(breaks = c(yday(paste(input$year, "-01-01", sep = "")), 
                                       yday(paste(input$year, "-02-01", sep = "")), 
@@ -397,7 +397,7 @@ output$plot_P <- renderPlotly({
         scale_color_manual(values = c("TRUE" = alpha("red", 0.9), 
                                       "FALSE" = alpha("black", 0.2))) + 
         scale_shape_manual(values = c("Bad" = 15, 
-                                      "ND = 6", 
+                                      "ND" = 6, 
                                       "Regular" = 16)) + 
         scale_x_continuous(breaks = c(yday(paste(input$year, "-01-01", sep = "")), 
                                       yday(paste(input$year, "-02-01", sep = "")), 
