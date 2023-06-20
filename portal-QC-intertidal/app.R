@@ -47,7 +47,7 @@ ui <- fluidPage(
                          value = FALSE)),
     column(3, 
            checkboxInput("include_bad", 
-                         "Include bad data (shown as squares)", 
+                         "Include bad data (shown as xes)", 
                          value = FALSE))
   ), 
   
